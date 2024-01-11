@@ -11,13 +11,17 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+// 2:14:12
+
 const initialFormdata = {
   email: "",
   password: "",
 };
 
 export default function Login() {
+
   const [formData, setFormData] = useState(initialFormdata);
+
   const {
     isAuthUser,
     setIsAuthUser,
@@ -29,8 +33,9 @@ export default function Login() {
 
   const router = useRouter();
 
-  console.log(formData);
+  // console.log(formData);
 
+  // 2:16:12
   function isValidForm() {
     return formData &&
       formData.email &&
@@ -41,11 +46,12 @@ export default function Login() {
       : false;
   }
 
+  // 2:17:30
   async function handleLogin() {
     setComponentLevelLoader({ loading: true, id: "" });
     const res = await login(formData);
 
-    console.log(res);
+    // console.log(res);
 
     if (res.success) {
       toast.success(res.message, {
@@ -82,22 +88,27 @@ export default function Login() {
                 Login
               </p>
               <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
-                {loginFormControls.map((controlItem) =>
-                  controlItem.componentType === "input" ? (
-                    <InputComponent
-                      type={controlItem.type}
-                      placeholder={controlItem.placeholder}
-                      label={controlItem.label}
-                      value={formData[controlItem.id]}
-                      onChange={(event) => {
-                        setFormData({
-                          ...formData,
-                          [controlItem.id]: event.target.value,
-                        });
-                      }}
-                    />
-                  ) : null
-                )}
+
+                {
+                  loginFormControls.map((controlItem) =>
+                    controlItem.componentType === "input" ? (
+                      <InputComponent
+                        type={controlItem.type}
+                        placeholder={controlItem.placeholder}
+                        label={controlItem.label}
+                        value={formData[controlItem.id]}
+                        key={controlItem.label}
+                        onChange={(event) => {
+                          setFormData({
+                            ...formData,
+                            [controlItem.id]: event.target.value,
+                          });
+                        }}
+                      />
+                    ) : null
+                  )
+                }
+
                 <button
                   className="disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
                      text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
@@ -117,6 +128,7 @@ export default function Login() {
                     "Login"
                   )}
                 </button>
+
                 <div className="flex flex-col gap-2">
                   <p>New to website ?</p>
                   <button

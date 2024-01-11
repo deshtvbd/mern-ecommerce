@@ -30,6 +30,7 @@ export default function GlobalState({ children }) {
     loading: false,
     id: "",
   });
+  // 2:19:13
   const [isAuthUser, setIsAuthUser] = useState(null);
   const [user, setUser] = useState(null);
   const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);

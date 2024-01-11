@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+// Video 1:38:50
+
 const UserSchema = new mongoose.Schema({
   name: String,
   email: String,

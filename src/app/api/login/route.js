@@ -5,6 +5,7 @@ import Joi from "joi";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
+// Video 2:02:42
 const schema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
@@ -26,6 +27,7 @@ export async function POST(req) {
     });
   }
 
+  // 2:05:48
   try {
     const checkUser = await User.findOne({ email });
     if (!checkUser) {

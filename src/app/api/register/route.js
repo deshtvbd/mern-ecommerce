@@ -4,6 +4,8 @@ import { hash } from "bcryptjs";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 
+// Video 1:41:10
+
 const schema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
@@ -18,6 +20,7 @@ export const dynamic = "force-dynamic";
 export async function POST(req) {
   await connectToDB();
 
+  // Video 1:41:48
   const { name, email, password, role } = await req.json();
   //validate the schema
 

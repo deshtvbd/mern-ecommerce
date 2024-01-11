@@ -39,6 +39,7 @@ export const adminNavOptions = [
   },
 ];
 
+// Video 1:18:09
 export const registrationFormControls = [
   {
     id: "name",
@@ -80,6 +81,7 @@ export const registrationFormControls = [
   },
 ];
 
+// Video 1:28:19
 export const loginFormControls = [
   {
     id: "email",

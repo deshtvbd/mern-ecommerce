@@ -44,7 +44,10 @@ function NavItems({ isModalView = false, isAdminView, router }) {
 }
 
 export default function Navbar() {
+
+  // Use this state to show/hide 
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
+
   const {
     user,
     isAuthUser,
@@ -83,6 +86,7 @@ export default function Navbar() {
     <>
       <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+
           <div
             onClick={() => router.push("/")}
             className="flex items-center cursor-pointer"
@@ -91,9 +95,11 @@ export default function Navbar() {
               Ecommercery
             </span>
           </div>
+
           <div className="flex md:order-2 gap-2">
             {!isAdminView && isAuthUser ? (
               <Fragment>
+
                 <button
                   className={
                     "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
@@ -102,6 +108,7 @@ export default function Navbar() {
                 >
                   Account
                 </button>
+
                 <button
                   className={
                     "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
@@ -110,8 +117,10 @@ export default function Navbar() {
                 >
                   Cart
                 </button>
+
               </Fragment>
             ) : null}
+
             {user?.role === "admin" ? (
               isAdminView ? (
                 <button
@@ -133,6 +142,7 @@ export default function Navbar() {
                 </button>
               )
             ) : null}
+
             {isAuthUser ? (
               <button
                 onClick={handleLogout}
@@ -152,6 +162,7 @@ export default function Navbar() {
                 Login
               </button>
             )}
+
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -179,6 +190,7 @@ export default function Navbar() {
           <NavItems router={router} isAdminView={isAdminView} />
         </div>
       </nav>
+
       <CommonModal
         showModalTitle={false}
         mainContent={
@@ -191,7 +203,9 @@ export default function Navbar() {
         show={showNavModal}
         setShow={setShowNavModal}
       />
+
       {showCartModal && <CartModal />}
+
     </>
   );
 }

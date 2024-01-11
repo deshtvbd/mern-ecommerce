@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+// Video 1:53:49
 const initialFormData = {
   name: "",
   email: "",
@@ -21,11 +22,11 @@ const initialFormData = {
 export default function Register() {
   const [formData, setFormData] = useState(initialFormData);
   const [isRegistered, setIsRegistered] = useState(false);
-  const { pageLevelLoader, setPageLevelLoader , isAuthUser } = useContext(GlobalContext);
+  const { pageLevelLoader, setPageLevelLoader, isAuthUser } = useContext(GlobalContext);
 
   const router = useRouter()
 
-  console.log(formData);
+  // console.log(formData);
 
   function isFormValid() {
     return formData &&
@@ -41,6 +42,7 @@ export default function Register() {
 
   console.log(isFormValid());
 
+  // Video 1:59:28
   async function handleRegisterOnSubmit() {
     setPageLevelLoader(true);
     const data = await registerNewUser(formData);
@@ -83,7 +85,7 @@ export default function Register() {
                   className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
                 text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
                 "
-                onClick={()=>router.push('/login')}
+                  onClick={() => router.push('/login')}
                 >
                   Login
                 </button>

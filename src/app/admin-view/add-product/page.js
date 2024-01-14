@@ -25,9 +25,13 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { resolve } from "styled-jsx/css";
 
+// 3:15:02
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// 3:16:38
 const storage = getStorage(app, firebaseStroageURL);
 
+// 3:18:37
 const createUniqueFileName = (getFile) => {
   const timeStamp = Date.now();
   const randomStringValue = Math.random().toString(36).substring(2, 12);
@@ -35,6 +39,8 @@ const createUniqueFileName = (getFile) => {
   return `${getFile.name}-${timeStamp}-${randomStringValue}`;
 };
 
+
+// 3:18:15
 async function helperForUPloadingImageToFirebase(file) {
   const getFileName = createUniqueFileName(file);
   const storageReference = ref(storage, `ecommerce/${getFileName}`);
@@ -43,7 +49,7 @@ async function helperForUPloadingImageToFirebase(file) {
   return new Promise((resolve, reject) => {
     uploadImage.on(
       "state_changed",
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
         reject(error);
@@ -57,6 +63,7 @@ async function helperForUPloadingImageToFirebase(file) {
   });
 }
 
+// 3:25:44
 const initialFormData = {
   name: "",
   price: 0,
@@ -87,6 +94,9 @@ export default function AdminAddNewProduct() {
     if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
   }, [currentUpdatedProduct]);
 
+
+  // 2:51:51
+  // 3:17:47
   async function handleImage(event) {
     const extractImageUrl = await helperForUPloadingImageToFirebase(
       event.target.files[0]
@@ -100,6 +110,7 @@ export default function AdminAddNewProduct() {
     }
   }
 
+  // 3:29:37
   function handleTileClick(getCurrentItem) {
     let cpySizes = [...formData.sizes];
     const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
@@ -116,6 +127,7 @@ export default function AdminAddNewProduct() {
     });
   }
 
+  // 3:34:00
   async function handleAddProduct() {
     setComponentLevelLoader({ loading: true, id: "" });
     const res =
@@ -147,6 +159,7 @@ export default function AdminAddNewProduct() {
 
   console.log(formData);
 
+  // 2:50:10
   return (
     <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
       <div className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl relative">
@@ -166,9 +179,11 @@ export default function AdminAddNewProduct() {
               data={AvailableSizes}
             />
           </div>
+
           {adminAddProductformControls.map((controlItem) =>
             controlItem.componentType === "input" ? (
               <InputComponent
+                key={controlItem.id}
                 type={controlItem.type}
                 placeholder={controlItem.placeholder}
                 label={controlItem.label}
@@ -182,6 +197,7 @@ export default function AdminAddNewProduct() {
               />
             ) : controlItem.componentType === "select" ? (
               <SelectComponent
+                key={controlItem.id}
                 label={controlItem.label}
                 options={controlItem.options}
                 value={formData[controlItem.id]}
@@ -194,6 +210,7 @@ export default function AdminAddNewProduct() {
               />
             ) : null
           )}
+
           <button
             onClick={handleAddProduct}
             className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
@@ -212,6 +229,7 @@ export default function AdminAddNewProduct() {
           </button>
         </div>
       </div>
+
       <Notification />
     </div>
   );

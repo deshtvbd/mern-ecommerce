@@ -4,6 +4,7 @@ import Product from "@/models/product";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 
+// 3:03:50
 const AddNewProductSchema = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
@@ -16,6 +17,7 @@ const AddNewProductSchema = Joi.object({
   imageUrl: Joi.string().required(),
 });
 
+// 3:02:49
 export const dynamic = "force-dynamic";
 
 export async function POST(req) {
@@ -24,9 +26,11 @@ export async function POST(req) {
 
     const isAuthUser = await AuthUser(req)
 
-    console.log(isAuthUser , 'sangam');
+    // console.log(isAuthUser, 'sangam');
 
     if (isAuthUser?.role === "admin") {
+
+      // 3:06:18
       const extractData = await req.json();
 
       const {

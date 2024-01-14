@@ -6,6 +6,7 @@ import { getAllOrdersForAllUsers, updateStatusOfOrder } from "@/services/order";
 import { useContext, useEffect } from "react";
 import { PulseLoader } from "react-spinners";
 
+// 2:41:43
 export default function AdminView() {
   const {
     allOrdersForAllUsers,
@@ -39,7 +40,7 @@ export default function AdminView() {
     if (user !== null) extractAllOrdersForAllUsers();
   }, [user]);
 
-  console.log(allOrdersForAllUsers);
+  // console.log(allOrdersForAllUsers);
 
   async function handleUpdateOrderStatus(getItem) {
     setComponentLevelLoader({ loading: true, id: getItem._id });
@@ -140,8 +141,8 @@ export default function AdminView() {
                           className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
                         >
                           {componentLevelLoader &&
-                          componentLevelLoader.loading &&
-                          componentLevelLoader.id === item._id ? (
+                            componentLevelLoader.loading &&
+                            componentLevelLoader.id === item._id ? (
                             <ComponentLevelLoader
                               text={"Updating Order Status"}
                               color={"#ffffff"}

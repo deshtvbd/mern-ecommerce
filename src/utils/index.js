@@ -99,6 +99,7 @@ export const loginFormControls = [
   },
 ];
 
+// 2:49:22
 export const adminAddProductformControls = [
   {
     id: "name",
@@ -190,18 +191,22 @@ export const AvailableSizes = [
   },
 ];
 
+// 3:14:48
+// Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "AUTH_DOMAIN",
-  projectId: "PROJECT_ID",
-  storageBucket: "STROAGE_BUCKET",
-  messagingSenderId: "MESSAGING_SENDER_ID",
-  appId: "APP_ID",
-  measurementId: "MEASUREMENT_ID",
+  apiKey: "AIzaSyDJ8nda9XXUmsn0kxKxj3F8aQhJQNvvxSM",
+  authDomain: "nextjs-ecommerce-2023-f5489.firebaseapp.com",
+  projectId: "nextjs-ecommerce-2023-f5489",
+  storageBucket: "nextjs-ecommerce-2023-f5489.appspot.com",
+  messagingSenderId: "403256429812",
+  appId: "1:403256429812:web:907727e0272714b25822a1",
+  measurementId: "G-M42NC70373"
 };
 
+// 3:16:18
 export const firebaseStroageURL =
-  "YOUR_FIREBASE_STROAGE_URL";
+  "gs://nextjs-ecommerce-2023-f5489.appspot.com";
 
 export const addNewAddressFormControls = [
   {

@@ -37,11 +37,13 @@ function NavItems({ isModalView = false, isAdminView, router }) {
             >
               {item.label}
             </li>
-          ))}
+          ))
+        }
       </ul>
     </div>
   );
 }
+
 
 export default function Navbar() {
 
@@ -59,10 +61,11 @@ export default function Navbar() {
     setShowCartModal
   } = useContext(GlobalContext);
 
+  // 2:43:45
   const pathName = usePathname();
   const router = useRouter();
 
-  console.log(currentUpdatedProduct, "navbar");
+  console.log(pathName);
 
   useEffect(() => {
     if (
@@ -72,6 +75,7 @@ export default function Navbar() {
       setCurrentUpdatedProduct(null);
   }, [pathName]);
 
+  // 2:29:10
   function handleLogout() {
     setIsAuthUser(false);
     setUser(null);
@@ -121,27 +125,30 @@ export default function Navbar() {
               </Fragment>
             ) : null}
 
-            {user?.role === "admin" ? (
-              isAdminView ? (
-                <button
-                  className={
-                    "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-                  }
-                  onClick={() => router.push("/")}
-                >
-                  Client View
-                </button>
-              ) : (
-                <button
-                  onClick={() => router.push("/admin-view")}
-                  className={
-                    "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-                  }
-                >
-                  Admin View
-                </button>
-              )
-            ) : null}
+            {
+              /* 2:43:06 */
+              user?.role === "admin" ? (
+                isAdminView ? (
+                  <button
+                    className={
+                      "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+                    }
+                    onClick={() => router.push("/")}
+                  >
+                    Client View
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => router.push("/admin-view")}
+                    className={
+                      "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+                    }
+                  >
+                    Admin View
+                  </button>
+                )
+              ) : null
+            }
 
             {isAuthUser ? (
               <button

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// 3:00:00
 const ProductSchema = new mongoose.Schema(
   {
     name: String,

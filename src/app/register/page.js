@@ -65,6 +65,7 @@ export default function Register() {
     console.log(data);
   }
 
+  // 2:39:23
   useEffect(() => {
     if (isAuthUser) router.push("/");
   }, [isAuthUser]);
@@ -94,6 +95,7 @@ export default function Register() {
                   {registrationFormControls.map((controlItem) =>
                     controlItem.componentType === "input" ? (
                       <InputComponent
+                        key={controlItem.id}
                         type={controlItem.type}
                         placeholder={controlItem.placeholder}
                         label={controlItem.label}
@@ -107,6 +109,7 @@ export default function Register() {
                       />
                     ) : controlItem.componentType === "select" ? (
                       <SelectComponent
+                        key={controlItem.id}
                         options={controlItem.options}
                         label={controlItem.label}
                         onChange={(event) => {
@@ -119,6 +122,7 @@ export default function Register() {
                       />
                     ) : null
                   )}
+
                   <button
                     className=" disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
                    text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide

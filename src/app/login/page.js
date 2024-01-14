@@ -48,34 +48,49 @@ export default function Login() {
 
   // 2:17:30
   async function handleLogin() {
+    // 2:35:35
     setComponentLevelLoader({ loading: true, id: "" });
+
     const res = await login(formData);
 
     // console.log(res);
 
+    // 2:20:42
     if (res.success) {
+
+      // 2:37:25
       toast.success(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
+
       setIsAuthUser(true);
       setUser(res?.finalData?.user);
       setFormData(initialFormdata);
+      // 2:21:43
       Cookies.set("token", res?.finalData?.token);
       localStorage.setItem("user", JSON.stringify(res?.finalData?.user));
+
+      // 2:35:53
       setComponentLevelLoader({ loading: false, id: "" });
     } else {
       toast.error(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       setIsAuthUser(false);
+      // 2:35:56
       setComponentLevelLoader({ loading: false, id: "" });
     }
   }
 
-  console.log(isAuthUser, user);
+  // console.log(isAuthUser, user);
 
+  // 2:23:00
+  // If the user is autheticated and try to access "Login" or "Register" page,
+  // the user will be redirected to Home page.
   useEffect(() => {
-    if (isAuthUser) router.push("/");
+    if (isAuthUser) {
+      router.push("/");
+    }
   }, [isAuthUser]);
 
   return (
@@ -116,6 +131,7 @@ export default function Login() {
                   disabled={!isValidForm()}
                   onClick={handleLogin}
                 >
+                  {/** 2:36:06 */}
                   {componentLevelLoader && componentLevelLoader.loading ? (
                     <ComponentLevelLoader
                       text={"Logging In"}

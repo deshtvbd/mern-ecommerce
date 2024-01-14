@@ -25,6 +25,7 @@ const protectedAdminRoutes = [
 
 export default function GlobalState({ children }) {
   const [showNavModal, setShowNavModal] = useState(false);
+  // 2:34:18
   const [pageLevelLoader, setPageLevelLoader] = useState(true);
   const [componentLevelLoader, setComponentLevelLoader] = useState({
     loading: false,
@@ -33,6 +34,7 @@ export default function GlobalState({ children }) {
   // 2:19:13
   const [isAuthUser, setIsAuthUser] = useState(null);
   const [user, setUser] = useState(null);
+
   const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -56,9 +58,13 @@ export default function GlobalState({ children }) {
   const router = useRouter();
   const pathName = usePathname();
 
+  // 2:24:00
+  /* When a user login and redirected to Home page, isAuthUser becomes null. The login data needs to be persisted in the GlobalContext. Althourhg the user is authenticated, when the app is redirected to Home page, the state variable vanishes. In the context, whenever user will load Home page, we have to check, if the token is already registered in the cookies. If the token is already available, the user is authenticated.
+  */
   useEffect(() => {
     if (Cookies.get("token") !== undefined) {
       setIsAuthUser(true);
+      // 2:26:35
       const userData = JSON.parse(localStorage.getItem("user")) || {};
       const getCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       setUser(userData);
@@ -101,7 +107,7 @@ export default function GlobalState({ children }) {
         setPageLevelLoader,
         isAuthUser,
         setIsAuthUser,
-        user,
+        user, // 2:19:51
         setUser,
         componentLevelLoader,
         setComponentLevelLoader,

@@ -2,6 +2,7 @@
 
 import Cookies from "js-cookie";
 
+// 3:09:37
 export const addNewProduct = async (formData) => {
   try {
     const response = await fetch("/api/admin/add-product", {
@@ -16,6 +17,7 @@ export const addNewProduct = async (formData) => {
     const data = await response.json();
 
     return data;
+
   } catch (error) {
     console.log(error);
   }

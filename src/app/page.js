@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 export default function Home() {
+  // 2:24:03
   const { isAuthUser } = useContext(GlobalContext);
 
   const [products, setProducts] = useState([]);
@@ -74,34 +75,34 @@ export default function Home() {
               <ul className="grid grid-cols-2 gap-4">
                 {products && products.length
                   ? products
-                      .filter((item) => item.onSale === "yes")
-                      .splice(0, 2)
-                      .map((productItem) => (
-                        <li
-                          onClick={() =>
-                            router.push(`/product/${productItem._id}`)
-                          }
-                          className="cursor-pointer"
-                          key={productItem._id}
-                        >
-                          <div>
-                            <img
-                              src={productItem.imageUrl}
-                              alt="Sale Product Item"
-                              className="object-cover w-full rounded aspect-square"
-                            />
-                          </div>
-                          <div className="mt-3">
-                            <h3 className="font-medium text-gray-900">
-                              {productItem.name}
-                            </h3>
-                            <p className="mt-1 text-sm text-gray-800">
-                              ${productItem.price}{" "}
-                              <span className="text-red-700">{`(-${productItem.priceDrop}%) Off`}</span>
-                            </p>
-                          </div>
-                        </li>
-                      ))
+                    .filter((item) => item.onSale === "yes")
+                    .splice(0, 2)
+                    .map((productItem) => (
+                      <li
+                        onClick={() =>
+                          router.push(`/product/${productItem._id}`)
+                        }
+                        className="cursor-pointer"
+                        key={productItem._id}
+                      >
+                        <div>
+                          <img
+                            src={productItem.imageUrl}
+                            alt="Sale Product Item"
+                            className="object-cover w-full rounded aspect-square"
+                          />
+                        </div>
+                        <div className="mt-3">
+                          <h3 className="font-medium text-gray-900">
+                            {productItem.name}
+                          </h3>
+                          <p className="mt-1 text-sm text-gray-800">
+                            ${productItem.price}{" "}
+                            <span className="text-red-700">{`(-${productItem.priceDrop}%) Off`}</span>
+                          </p>
+                        </div>
+                      </li>
+                    ))
                   : null}
               </ul>
             </div>

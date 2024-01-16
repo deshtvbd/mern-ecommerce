@@ -20,6 +20,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -42,6 +43,7 @@ const createUniqueFileName = (getFile) => {
 
 // 3:18:15
 async function helperForUPloadingImageToFirebase(file) {
+
   const getFileName = createUniqueFileName(file);
   const storageReference = ref(storage, `ecommerce/${getFileName}`);
   const uploadImage = uploadBytesResumable(storageReference, file);
@@ -76,9 +78,11 @@ const initialFormData = {
   priceDrop: 0,
 };
 
+
 export default function AdminAddNewProduct() {
   const [formData, setFormData] = useState(initialFormData);
 
+  // 4:25:13
   const {
     componentLevelLoader,
     setComponentLevelLoader,
@@ -128,8 +132,12 @@ export default function AdminAddNewProduct() {
   }
 
   // 3:34:00
+  // 4:30:00
   async function handleAddProduct() {
+
+    // 3:38:15
     setComponentLevelLoader({ loading: true, id: "" });
+
     const res =
       currentUpdatedProduct !== null
         ? await updateAProduct(formData)
@@ -145,6 +153,8 @@ export default function AdminAddNewProduct() {
 
       setFormData(initialFormData);
       setCurrentUpdatedProduct(null)
+
+      // 3:41:38
       setTimeout(() => {
         router.push("/admin-view/all-products");
       }, 1000);

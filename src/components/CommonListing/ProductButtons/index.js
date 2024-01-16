@@ -8,8 +8,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
+// 3:49:00
 export default function ProductButton({ item }) {
+
   const pathName = usePathname();
+  // 4:24:18
   const {
     setCurrentUpdatedProduct,
     setComponentLevelLoader,
@@ -17,10 +20,12 @@ export default function ProductButton({ item }) {
     user,
     showCartModal, setShowCartModal
   } = useContext(GlobalContext);
+
   const router = useRouter();
 
   const isAdminView = pathName.includes("admin-view");
 
+  // 4:34:30
   async function handleDeleteProduct(item) {
     setComponentLevelLoader({ loading: true, id: item._id });
 
@@ -62,6 +67,8 @@ export default function ProductButton({ item }) {
     console.log(res);
   }
 
+
+
   return isAdminView ? (
     <>
       <button
@@ -73,13 +80,14 @@ export default function ProductButton({ item }) {
       >
         Update
       </button>
+
       <button
         onClick={() => handleDeleteProduct(item)}
         className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
       >
         {componentLevelLoader &&
-        componentLevelLoader.loading &&
-        item._id === componentLevelLoader.id ? (
+          componentLevelLoader.loading &&
+          item._id === componentLevelLoader.id ? (
           <ComponentLevelLoader
             text={"Deleting Product"}
             color={"#ffffff"}
@@ -97,8 +105,8 @@ export default function ProductButton({ item }) {
         className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
       >
         {componentLevelLoader &&
-        componentLevelLoader.loading &&
-        componentLevelLoader.id === item._id ? (
+          componentLevelLoader.loading &&
+          componentLevelLoader.id === item._id ? (
           <ComponentLevelLoader
             text={"Adding to cart"}
             color={"#ffffff"}

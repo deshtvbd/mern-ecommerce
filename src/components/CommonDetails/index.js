@@ -7,6 +7,7 @@ import ComponentLevelLoader from "../Loader/componentlevel";
 import { addToCart } from "@/services/cart";
 import Notification from "../Notification";
 
+// 5:08:23
 export default function CommonDetails({ item }) {
   const {
     setComponentLevelLoader,
@@ -34,6 +35,7 @@ export default function CommonDetails({ item }) {
       setShowCartModal(true);
     }
   }
+
 
   return (
     <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -83,9 +85,8 @@ export default function CommonDetails({ item }) {
             <div className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4 sm:flex-row sm:space-y-0">
               <div className="flex items-end">
                 <h1
-                  className={`text-3xl font-bold mr-2 ${
-                    item.onSale === "yes" ? "line-through" : ""
-                  }`}
+                  className={`text-3xl font-bold mr-2 ${item.onSale === "yes" ? "line-through" : ""
+                    }`}
                 >
                   ${item && item.price}
                 </h1>
@@ -140,7 +141,8 @@ export default function CommonDetails({ item }) {
           </div>
         </div>
       </div>
-      <Notification/>
+
+      <Notification />
     </section>
   );
 }

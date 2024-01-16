@@ -23,8 +23,13 @@ export const addNewProduct = async (formData) => {
   }
 };
 
+// 4:03:35
 export const getAllAdminProducts = async () => {
   try {
+
+    // VERY VERY IMPORTANT
+    // when we fetching some something from SERVER-SIDE,
+    // we have to provide ABSOLUTE URL (ie. Full URL)
     const res = await fetch("http://localhost:3000/api/admin/all-products", {
       method: "GET",
       cache: "no-store",
@@ -38,6 +43,7 @@ export const getAllAdminProducts = async () => {
   }
 };
 
+// 4:15:45
 export const updateAProduct = async (formData) => {
   try {
     const res = await fetch("/api/admin/update-product", {
@@ -58,6 +64,7 @@ export const updateAProduct = async (formData) => {
   }
 };
 
+// 4:20:20
 export const deleteAProduct = async (id) => {
   try {
     const res = await fetch(`/api/admin/delete-product?id=${id}`, {
@@ -75,6 +82,7 @@ export const deleteAProduct = async (id) => {
   }
 };
 
+// 4:48:35
 export const productByCategory = async (id) => {
   try {
     const res = await fetch(
@@ -93,6 +101,7 @@ export const productByCategory = async (id) => {
   }
 };
 
+// 5:04:11
 export const productById = async (id) => {
   try {
     const res = await fetch(

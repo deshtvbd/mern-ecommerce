@@ -4,9 +4,12 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+// 5:00:50
 export async function GET(req) {
   try {
+
     await connectToDB();
+
     const { searchParams } = new URL(req.url);
     const productId = searchParams.get("id");
 

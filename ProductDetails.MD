@@ -29,9 +29,9 @@ Role      : customer
 
 ### Firebase
 
-I am using manzur.deshtv@gmail.com account while creating the Firebase account.
-
 https://firebase.google.com/
+
+Login: manzur.deshtv@gmail.com
 
 If I am logged in the browser, navigating to the Firebase's homepage will automatically log in.
 Now, go to Firebase Console and create a new project.

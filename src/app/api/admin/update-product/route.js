@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+// 4:11:54
 export async function PUT(req) {
   try {
     await connectToDB();
@@ -52,7 +53,7 @@ export async function PUT(req) {
       } else {
         return NextResponse.json({
           success: false,
-          message: "Failed to update the product ! Please try again later",
+          message: "Failed to update the product! Please try again later",
         });
       }
     } else {

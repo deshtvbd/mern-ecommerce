@@ -24,9 +24,10 @@ export async function POST(req) {
   try {
     await connectToDB();
 
+    // 5:31:00
     const isAuthUser = await AuthUser(req)
 
-    // console.log(isAuthUser, 'sangam');
+    // console.log(isAuthUser, 'In api/admin/app-product/route.js');
 
     if (isAuthUser?.role === "admin") {
 

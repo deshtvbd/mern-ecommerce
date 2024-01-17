@@ -10,6 +10,7 @@ export async function PUT(req) {
   try {
     await connectToDB();
 
+    // 5:37:22
     const isAuthUser = await AuthUser(req);
 
     if (isAuthUser?.role === "admin") {

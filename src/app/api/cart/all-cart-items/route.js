@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+// 5:49:00
 export async function GET(req) {
   try {
     await connectToDB();
@@ -15,11 +16,13 @@ export async function GET(req) {
       const { searchParams } = new URL(req.url);
       const id = searchParams.get("id");
 
-      if (!id)
+      if (!id) {
         return NextResponse.json({
           success: false,
           message: "Please login in!",
         });
+      }
+
       const extractAllCartItems = await Cart.find({ userID: id }).populate(
         "productID"
       );

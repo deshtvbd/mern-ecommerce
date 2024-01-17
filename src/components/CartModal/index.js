@@ -8,7 +8,9 @@ import { toast } from "react-toastify";
 import ComponentLevelLoader from "../Loader/componentlevel";
 import { useRouter } from "next/navigation";
 
+// 6:09:57
 export default function CartModal() {
+
   const {
     showCartModal,
     setShowCartModal,
@@ -28,20 +30,20 @@ export default function CartModal() {
       const updatedData =
         res.data && res.data.length
           ? res.data.map((item) => ({
-              ...item,
-              productID: {
-                ...item.productID,
-                price:
-                  item.productID.onSale === "yes"
-                    ? parseInt(
-                        (
-                          item.productID.price -
-                          item.productID.price * (item.productID.priceDrop / 100)
-                        ).toFixed(2)
-                      )
-                    : item.productID.price,
-              },
-            }))
+            ...item,
+            productID: {
+              ...item.productID,
+              price:
+                item.productID.onSale === "yes"
+                  ? parseInt(
+                    (
+                      item.productID.price -
+                      item.productID.price * (item.productID.priceDrop / 100)
+                    ).toFixed(2)
+                  )
+                  : item.productID.price,
+            },
+          }))
           : [];
       setCartItems(updatedData);
       localStorage.setItem("cartItems", JSON.stringify(updatedData));
@@ -73,6 +75,7 @@ export default function CartModal() {
     }
   }
 
+
   return (
     <CommonModal
       showButtons={true}
@@ -81,61 +84,63 @@ export default function CartModal() {
       mainContent={
         cartItems && cartItems.length ? (
           <ul role="list" className="-my-6 divide-y divide-gray-300">
-            {cartItems.map((cartItem) => (
-              <li key={cartItem.id} className="flex py-6">
-                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                  <img
-                    src={
-                      cartItem &&
-                      cartItem.productID &&
-                      cartItem.productID.imageUrl
-                    }
-                    alt="Cart Item"
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-                <div className="ml-4 flex flex-1 flex-col">
-                  <div>
-                    <div className="flex justify-between text-base font-medium text-gray-900">
-                      <h3>
-                        <a>
-                          {cartItem &&
-                            cartItem.productID &&
-                            cartItem.productID.name}
-                        </a>
-                      </h3>
-                    </div>
-                    <p className="mt-1 text-sm text-gray-600">
-                      $
-                      {cartItem &&
+            {
+              cartItems.map((cartItem) => (
+                <li key={cartItem.id} className="flex py-6">
+                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                    <img
+                      src={
+                        cartItem &&
                         cartItem.productID &&
-                        cartItem.productID.price}
-                    </p>
+                        cartItem.productID.imageUrl
+                      }
+                      alt="Cart Item"
+                      className="h-full w-full object-cover object-center"
+                    />
                   </div>
-                  <div className="flex flex-1 items-end justify-between text-sm">
-                    <button
-                      type="button"
-                      className="font-medium text-yellow-600 sm:order-2"
-                      onClick={() => handleDeleteCartItem(cartItem._id)}
-                    >
-                      {componentLevelLoader &&
-                      componentLevelLoader.loading &&
-                      componentLevelLoader.id === cartItem._id ? (
-                        <ComponentLevelLoader
-                          text={"Removing"}
-                          color={"#000000"}
-                          loading={
-                            componentLevelLoader && componentLevelLoader.loading
-                          }
-                        />
-                      ) : (
-                        "Remove"
-                      )}
-                    </button>
+                  <div className="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div className="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a>
+                            {cartItem &&
+                              cartItem.productID &&
+                              cartItem.productID.name}
+                          </a>
+                        </h3>
+                      </div>
+                      <p className="mt-1 text-sm text-gray-600">
+                        $
+                        {cartItem &&
+                          cartItem.productID &&
+                          cartItem.productID.price}
+                      </p>
+                    </div>
+                    <div className="flex flex-1 items-end justify-between text-sm">
+                      <button
+                        type="button"
+                        className="font-medium text-yellow-600 sm:order-2"
+                        onClick={() => handleDeleteCartItem(cartItem._id)}
+                      >
+                        {componentLevelLoader &&
+                          componentLevelLoader.loading &&
+                          componentLevelLoader.id === cartItem._id ? (
+                          <ComponentLevelLoader
+                            text={"Removing"}
+                            color={"#000000"}
+                            loading={
+                              componentLevelLoader && componentLevelLoader.loading
+                            }
+                          />
+                        ) : (
+                          "Remove"
+                        )}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))
+            }
           </ul>
         ) : null
       }

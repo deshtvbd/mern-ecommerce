@@ -4,6 +4,7 @@ import Cart from "@/models/cart";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 
+// 5:43:38
 const AddToCart = Joi.object({
   userID: Joi.string().required(),
   productID: Joi.string().required(),
@@ -11,6 +12,7 @@ const AddToCart = Joi.object({
 
 export const dynamic = "force-dynamic";
 
+// 5:38:57
 export async function POST(req) {
   try {
     await connectToDB();
@@ -18,7 +20,7 @@ export async function POST(req) {
 
     if (isAuthUser) {
       const data = await req.json();
-      const {productID , userID} = data;
+      const { productID, userID } = data;
 
       const { error } = AddToCart.validate({ userID, productID });
 
@@ -37,7 +39,7 @@ export async function POST(req) {
       });
 
       console.log(isCurrentCartItemAlreadyExists);
-      
+
 
       if (isCurrentCartItemAlreadyExists?.length > 0) {
         return NextResponse.json({

@@ -36,7 +36,7 @@ export default function GlobalState({ children }) {
   const [user, setUser] = useState(null);
   // 4:23:09
   const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
-
+  // 6:08:40
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [addresses, setAddresses] = useState([]);

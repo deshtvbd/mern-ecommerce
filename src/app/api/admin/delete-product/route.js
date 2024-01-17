@@ -9,6 +9,8 @@ export const dynamic = "force-dynamic";
 export async function DELETE(req) {
   try {
     await connectToDB();
+
+    // 5:36:21
     const isAuthUser = await AuthUser(req);
 
     if (isAuthUser?.role === "admin") {

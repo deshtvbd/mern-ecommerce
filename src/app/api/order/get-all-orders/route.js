@@ -5,9 +5,11 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+// 9:02:35
 export async function GET(req) {
   try {
     await connectToDB();
+
     const isAuthUser = await AuthUser(req);
 
     if (isAuthUser) {

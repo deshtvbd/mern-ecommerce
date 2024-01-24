@@ -11,7 +11,9 @@ import { useContext, useEffect, useState } from "react";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
+// 8:08:32
 export default function Checkout() {
+
   const {
     cartItems,
     user,
@@ -21,19 +23,26 @@ export default function Checkout() {
     setCheckoutFormData,
   } = useContext(GlobalContext);
 
+  // 8:28:01
   const [selectedAddress, setSelectedAddress] = useState(null);
+  // 8:49:29
   const [isOrderProcessing, setIsOrderProcessing] = useState(false);
+  // 9:13:34
   const [orderSuccess, setOrderSuccess] = useState(false);
 
   const router = useRouter();
+  // 9:15:15
   const params = useSearchParams();
 
+  // 8:46:45
   const publishableKey =
-    "pk_test_51NMv6ZSC6E6fnyMeRIEb9oEXdGRCC9yrBTT4xWHgcjWOuFcqFiAHErvaS50K1hl5t5WJXVGfLLWxvb705IWJhA3300yCcrMnlM";
+    "pk_test_51Oc1x9D8qWDJ9WXwvktZHMAgbagcZMFvootOBDReEEF8V5MrTpPLyoizpWqHRERUuW7iJqtHZC6Wl2bLWr1xvO5w00LbqbLIC1";
+  // 8:47:06
   const stripePromise = loadStripe(publishableKey);
 
   console.log(cartItems);
 
+  // 8:17:06
   async function getAllAddresses() {
     const res = await fetchAllAddresses(user?._id);
 
@@ -42,10 +51,12 @@ export default function Checkout() {
     }
   }
 
+  // 8:17:42
   useEffect(() => {
     if (user !== null) getAllAddresses();
   }, [user]);
 
+  // 9:15:48
   useEffect(() => {
     async function createFinalOrder() {
       const isStripe = JSON.parse(localStorage.getItem("stripe"));
@@ -57,6 +68,7 @@ export default function Checkout() {
         cartItems.length > 0
       ) {
         setIsOrderProcessing(true);
+
         const getCheckoutFormData = JSON.parse(
           localStorage.getItem("checkoutFormData")
         );
@@ -83,12 +95,14 @@ export default function Checkout() {
         if (res.success) {
           setIsOrderProcessing(false);
           setOrderSuccess(true);
+
           toast.success(res.message, {
             position: toast.POSITION.TOP_RIGHT,
           });
         } else {
           setIsOrderProcessing(false);
           setOrderSuccess(false);
+
           toast.error(res.message, {
             position: toast.POSITION.TOP_RIGHT,
           });
@@ -96,12 +110,19 @@ export default function Checkout() {
       }
     }
 
+    // 9:21:03
     createFinalOrder();
+
   }, [params.get("status"), cartItems]);
 
+
+  // 8:28:23
+  // 8:31:01
   function handleSelectedAddress(getAddress) {
+
     if (getAddress._id === selectedAddress) {
       setSelectedAddress(null);
+
       setCheckoutFormData({
         ...checkoutFormData,
         shippingAddress: {},
@@ -111,6 +132,7 @@ export default function Checkout() {
     }
 
     setSelectedAddress(getAddress._id);
+
     setCheckoutFormData({
       ...checkoutFormData,
       shippingAddress: {
@@ -124,6 +146,7 @@ export default function Checkout() {
     });
   }
 
+  // 8:46:36
   async function handleCheckout() {
     const stripe = await stripePromise;
 
@@ -140,7 +163,10 @@ export default function Checkout() {
     }));
 
     const res = await callStripeSession(createLineItems);
+
+    // 8:49:45
     setIsOrderProcessing(true);
+
     localStorage.setItem("stripe", true);
     localStorage.setItem("checkoutFormData", JSON.stringify(checkoutFormData));
 
@@ -148,11 +174,12 @@ export default function Checkout() {
       sessionId: res.id,
     });
 
-    console.log(error);
+    console.log("handleCheckout: ", error);
   }
 
   console.log(checkoutFormData);
 
+  // 9:14:54
   useEffect(() => {
     if (orderSuccess) {
       setTimeout(() => {
@@ -181,6 +208,7 @@ export default function Checkout() {
     );
   }
 
+  // 9:14:02
   if (isOrderProcessing) {
     return (
       <div className="w-full min-h-screen flex justify-center items-center">
@@ -193,6 +221,7 @@ export default function Checkout() {
       </div>
     );
   }
+
 
   return (
     <div>
@@ -226,43 +255,50 @@ export default function Checkout() {
             )}
           </div>
         </div>
+
         <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-          <p className="text-xl font-medium">Shipping address details</p>
+          <p className="text-xl font-medium">
+            Shipping address details
+          </p>
           <p className="text-gray-400 font-bold">
             Complete your order by selecting address below
           </p>
+
           <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-6">
-            {addresses && addresses.length ? (
-              addresses.map((item) => (
-                <div
-                  onClick={() => handleSelectedAddress(item)}
-                  key={item._id}
-                  className={`border p-6 ${
-                    item._id === selectedAddress ? "border-red-900" : ""
-                  }`}
-                >
-                  <p>Name : {item.fullName}</p>
-                  <p>Address : {item.address}</p>
-                  <p>City : {item.city}</p>
-                  <p>Country : {item.country}</p>
-                  <p>PostalCode : {item.postalCode}</p>
-                  <button className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
-                    {item._id === selectedAddress
-                      ? "Selected Address"
-                      : "Select Address"}
-                  </button>
-                </div>
-              ))
-            ) : (
-              <p>No addresses added</p>
-            )}
+            {
+              addresses && addresses.length ? (
+                addresses.map((item) => (
+                  <div
+                    onClick={() => handleSelectedAddress(item)}
+                    key={item._id}
+                    className={`border p-6 ${item._id === selectedAddress ? "border-red-900" : ""
+                      }`}
+                  >
+                    <p>Name : {item.fullName}</p>
+                    <p>Address : {item.address}</p>
+                    <p>City : {item.city}</p>
+                    <p>Country : {item.country}</p>
+                    <p>PostalCode : {item.postalCode}</p>
+                    <button className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                      {item._id === selectedAddress
+                        ? "Selected Address"
+                        : "Select Address"}
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>No addresses added</p>
+              )
+            }
           </div>
+
           <button
             onClick={() => router.push("/account")}
             className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
           >
             Add new address
           </button>
+
           <div className="mt-6 border-t border-b py-2">
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Subtotal</p>
@@ -270,28 +306,31 @@ export default function Checkout() {
                 $
                 {cartItems && cartItems.length
                   ? cartItems.reduce(
-                      (total, item) => item.productID.price + total,
-                      0
-                    )
+                    (total, item) => item.productID.price + total,
+                    0
+                  )
                   : "0"}
               </p>
             </div>
+
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Shipping</p>
               <p className="text-lg font-bold text-gray-900">Free</p>
             </div>
+
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Total</p>
               <p className="text-lg font-bold text-gray-900">
                 $
                 {cartItems && cartItems.length
                   ? cartItems.reduce(
-                      (total, item) => item.productID.price + total,
-                      0
-                    )
+                    (total, item) => item.productID.price + total,
+                    0
+                  )
                   : "0"}
               </p>
             </div>
+
             <div className="pb-10">
               <button
                 disabled={
@@ -307,6 +346,7 @@ export default function Checkout() {
           </div>
         </div>
       </div>
+
       <Notification />
     </div>
   );

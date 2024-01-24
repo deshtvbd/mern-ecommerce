@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+// 7:20:30
 export async function DELETE(req) {
   try {
     await connectToDB();

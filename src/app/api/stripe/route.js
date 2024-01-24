@@ -1,15 +1,17 @@
 import AuthUser from "@/middleware/AuthUser";
 import { NextResponse } from "next/server";
 
-const stripe = require("stripe")(
-  "sk_test_51NMv6ZSC6E6fnyMeTYV3h3Xge6Tot3xYQVEO6KMpiB5A6bKIrRS9YymIBEupAFqF0XM274IwwU2Zq7EXx1Pn8LiA00SyPEZqk9"
-);
+// 8:41:07
+// Stripe Secret key
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export const dynamic = "force-dynamic";
 
+// 8:39:38
 export async function POST(req) {
   try {
     const isAuthUser = await AuthUser(req);
+
     if (isAuthUser) {
       const res = await req.json();
 
@@ -33,6 +35,7 @@ export async function POST(req) {
     }
   } catch (e) {
     console.log(e);
+
     return NextResponse.json({
       status: 500,
       success: false,

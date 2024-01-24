@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 
+// 8:43:50
 export const callStripeSession = async (formData) => {
   try {
     const res = await fetch("/api/stripe", {

@@ -23,9 +23,11 @@ export default function CartModal() {
 
   const router = useRouter();
 
+  // 6:15:04
   async function extractAllCartItems() {
     const res = await getAllCartItems(user?._id);
 
+    // 6:18:30
     if (res.success) {
       const updatedData =
         res.data && res.data.length
@@ -45,7 +47,9 @@ export default function CartModal() {
             },
           }))
           : [];
+
       setCartItems(updatedData);
+      // 6:18:48
       localStorage.setItem("cartItems", JSON.stringify(updatedData));
     }
 
@@ -56,21 +60,26 @@ export default function CartModal() {
     if (user !== null) extractAllCartItems();
   }, [user]);
 
+  // 6:30:06
   async function handleDeleteCartItem(getCartItemID) {
     setComponentLevelLoader({ loading: true, id: getCartItemID });
+
     const res = await deleteFromCart(getCartItemID);
 
     if (res.success) {
       setComponentLevelLoader({ loading: false, id: "" });
+
       toast.success(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
 
+      // 6:32:55
       extractAllCartItems();
     } else {
       toast.error(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
+
       setComponentLevelLoader({ loading: false, id: getCartItemID });
     }
   }
@@ -122,6 +131,7 @@ export default function CartModal() {
                         className="font-medium text-yellow-600 sm:order-2"
                         onClick={() => handleDeleteCartItem(cartItem._id)}
                       >
+                        {/** // 6:33:11 */}
                         {componentLevelLoader &&
                           componentLevelLoader.loading &&
                           componentLevelLoader.id === cartItem._id ? (
@@ -156,17 +166,20 @@ export default function CartModal() {
           >
             Go To Cart
           </button>
+
           <button
             disabled={cartItems && cartItems.length === 0}
             type="button"
             onClick={() => {
               router.push("/checkout");
+              // 8:37:22
               setShowCartModal(false);
             }}
             className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
           >
             Checkout
           </button>
+
           <div className="mt-6 flex justify-center text-center text-sm text-gray-600">
             <button type="button" className="font-medium text-grey">
               Continue Shopping

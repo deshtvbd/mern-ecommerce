@@ -6,6 +6,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const GlobalContext = createContext(null);
 
+// 8:29:30
 export const initialCheckoutFormData = {
   shippingAddress: {},
   paymentMethod: "",
@@ -38,7 +39,9 @@ export default function GlobalState({ children }) {
   const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
   // 6:08:40
   const [showCartModal, setShowCartModal] = useState(false);
+  // 6:18:04
   const [cartItems, setCartItems] = useState([]);
+  // 7:38:14
   const [addresses, setAddresses] = useState([]);
   const [addressFormData, setAddressFormData] = useState({
     fullName: "",
@@ -48,6 +51,7 @@ export default function GlobalState({ children }) {
     address: "",
   });
 
+  // 8:29:12
   const [checkoutFormData, setCheckoutFormData] = useState(
     initialCheckoutFormData
   );
@@ -67,8 +71,11 @@ export default function GlobalState({ children }) {
       setIsAuthUser(true);
       // 2:26:35
       const userData = JSON.parse(localStorage.getItem("user")) || {};
+      // 8:10:45
       const getCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
       setUser(userData);
+      // 8:11:07
       setCartItems(getCartItems);
     } else {
       setIsAuthUser(false);

@@ -16,6 +16,7 @@ export default function CommonDetails({ item }) {
     setShowCartModal,
   } = useContext(GlobalContext);
 
+  // 7:03:54
   async function handleAddToCart(getItem) {
     setComponentLevelLoader({ loading: true, id: "" });
 
@@ -31,6 +32,7 @@ export default function CommonDetails({ item }) {
       toast.error(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
+
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true);
     }
@@ -82,6 +84,7 @@ export default function CommonDetails({ item }) {
             <h1 className="text-2xl font-bold text-gray-900">
               {item && item.name}
             </h1>
+
             <div className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4 sm:flex-row sm:space-y-0">
               <div className="flex items-end">
                 <h1
@@ -97,6 +100,7 @@ export default function CommonDetails({ item }) {
                   ).toFixed(2)}`}</h1>
                 ) : null}
               </div>
+
               <button
                 type="button"
                 onClick={() => handleAddToCart(item)}
@@ -115,6 +119,7 @@ export default function CommonDetails({ item }) {
                 )}
               </button>
             </div>
+
             <ul className="mt-8 space-y-2">
               <li className="flex items-center text-left text-sm font-medium text-gray-600">
                 {item && item.deliveryInfo}
@@ -123,6 +128,7 @@ export default function CommonDetails({ item }) {
                 {"Cancel anytime"}
               </li>
             </ul>
+
             <div className="lg:col-span-3">
               <div className="border-b border-gray-400">
                 <nav className="flex gap-4">
@@ -138,10 +144,12 @@ export default function CommonDetails({ item }) {
                 {item && item.description}
               </div>
             </div>
+
           </div>
         </div>
       </div>
 
+      {/** 7:06:56 */}
       <Notification />
     </section>
   );

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import ComponentLevelLoader from "../Loader/componentlevel";
 
+// 6:38:03
 export default function CommonCart({
   cartItems = [],
   handleDeleteCartItem,
@@ -60,8 +61,8 @@ export default function CommonCart({
                                 }
                               >
                                 {componentLevelLoader &&
-                                componentLevelLoader.loading &&
-                                componentLevelLoader.id === cartItem._id ? (
+                                  componentLevelLoader.loading &&
+                                  componentLevelLoader.id === cartItem._id ? (
                                   <ComponentLevelLoader
                                     text={"Removing"}
                                     color={"#0000000"}
@@ -81,7 +82,9 @@ export default function CommonCart({
                     ))}
                   </ul>
                 ) : (
-                  <h1 className="font-bold text-lg">Your cart is Empty !</h1>
+                  <h1 className="font-bold text-lg">
+                    Your cart is Empty !
+                  </h1>
                 )}
               </div>
               <div className="mt-6 border-t border-b py-2">
@@ -91,9 +94,9 @@ export default function CommonCart({
                     $
                     {cartItems && cartItems.length
                       ? cartItems.reduce(
-                          (total, item) => item.productID.price + total,
-                          0
-                        )
+                        (total, item) => item.productID.price + total,
+                        0
+                      )
                       : "0"}
                   </p>
                 </div>
@@ -107,16 +110,16 @@ export default function CommonCart({
                     $
                     {cartItems && cartItems.length
                       ? cartItems.reduce(
-                          (total, item) => item.productID.price + total,
-                          0
-                        )
+                        (total, item) => item.productID.price + total,
+                        0
+                      )
                       : "0"}
                   </p>
                 </div>
                 <div className="mt-5 text-center">
                   <button
-                  onClick={()=>router.push('/checkout')}
-                    disabled={cartItems && cartItems.length === 0}
+                    onClick={() => router.push('/checkout')}
+                    disabled={cartItems && cartItems.length === 0} // 7:00:08
                     className="disabled:opacity-50 group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
                   >
                     Checkout

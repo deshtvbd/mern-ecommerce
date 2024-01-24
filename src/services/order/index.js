@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 
+// 9:09:28
 export const createNewOrder = async (formData) => {
   try {
     const res = await fetch("/api/order/create-order", {
@@ -19,6 +20,7 @@ export const createNewOrder = async (formData) => {
   }
 };
 
+// 9:11:25
 export const getAllOrdersForUser = async (id) => {
   try {
     const res = await fetch(`/api/order/get-all-orders?id=${id}`, {
@@ -36,6 +38,7 @@ export const getAllOrdersForUser = async (id) => {
   }
 };
 
+// 9:12:29
 export const getOrderDetails = async (id) => {
   try {
     const res = await fetch(`/api/order/order-details?id=${id}`, {
@@ -53,6 +56,7 @@ export const getOrderDetails = async (id) => {
   }
 };
 
+// 9:11:30
 export const getAllOrdersForAllUsers = async () => {
   try {
     const res = await fetch(`/api/admin/orders/get-all-orders`, {

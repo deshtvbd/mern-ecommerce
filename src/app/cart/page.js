@@ -7,41 +7,46 @@ import { useContext, useEffect } from "react";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
+// 6:37:05
 export default function Cart() {
   const {
     user,
     setCartItems,
     cartItems,
-    pageLevelLoader,
+    pageLevelLoader, // 6:53:02
     setPageLevelLoader,
     setComponentLevelLoader,
     componentLevelLoader,
   } = useContext(GlobalContext);
 
   async function extractAllCartItems() {
+    // 6:53:11
     setPageLevelLoader(true);
+
     const res = await getAllCartItems(user?._id);
 
     if (res.success) {
       const updatedData =
         res.data && res.data.length
           ? res.data.map((item) => ({
-              ...item,
-              productID: {
-                ...item.productID,
-                price:
-                  item.productID.onSale === "yes"
-                    ? parseInt(
-                        (
-                          item.productID.price -
-                          item.productID.price * (item.productID.priceDrop / 100)
-                        ).toFixed(2)
-                      )
-                    : item.productID.price,
-              },
-            }))
+            ...item,
+            productID: {
+              ...item.productID,
+              price:
+                item.productID.onSale === "yes"
+                  ? parseInt(
+                    (
+                      item.productID.price -
+                      item.productID.price * (item.productID.priceDrop / 100)
+                    ).toFixed(2)
+                  )
+                  : item.productID.price,
+            },
+          }))
           : [];
+
       setCartItems(updatedData);
+      // 6:53:16
       setPageLevelLoader(false);
       localStorage.setItem("cartItems", JSON.stringify(updatedData));
     }
@@ -72,6 +77,7 @@ export default function Cart() {
     }
   }
 
+  // 6:53:58
   if (pageLevelLoader) {
     return (
       <div className="w-full min-h-screen flex justify-center items-center">
@@ -85,6 +91,7 @@ export default function Cart() {
     );
   }
 
+  // 6:56:40
   return (
     <CommonCart
       componentLevelLoader={componentLevelLoader}

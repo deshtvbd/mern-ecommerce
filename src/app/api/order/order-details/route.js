@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+// 9:05:37
 export async function GET(req) {
   try {
     await connectToDB();

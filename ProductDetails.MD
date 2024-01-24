@@ -41,3 +41,9 @@ Firebase Project Name: NextJS-Ecommerce-2023
 * After I get Firebase dashboard, I shall create a new Web app.
 * From "Build" menu, configure "Storage" in "test mode".
 
+Dummy Visa Credit Card Details
+https://www.paypalobjects.com/en_GB/vhelp/paypalmanager_help/credit_card_numbers.htm
+******************************
+4111111111111111
+02/28
+

@@ -56,8 +56,10 @@ export default function Checkout() {
     if (user !== null) getAllAddresses();
   }, [user]);
 
-  // 9:15:48
+  // 9:14:57
   useEffect(() => {
+
+    // 9:15:58
     async function createFinalOrder() {
       const isStripe = JSON.parse(localStorage.getItem("stripe"));
 
@@ -179,7 +181,8 @@ export default function Checkout() {
 
   console.log(checkoutFormData);
 
-  // 9:14:54
+
+  // 9:29:39
   useEffect(() => {
     if (orderSuccess) {
       setTimeout(() => {
@@ -188,6 +191,7 @@ export default function Checkout() {
       }, [2000]);
     }
   }, [orderSuccess]);
+
 
   if (orderSuccess) {
     return (
@@ -198,7 +202,7 @@ export default function Checkout() {
               <div className="px-4 py-6 sm:px-8 sm:py-10 flex flex-col gap-5">
                 <h1 className="font-bold text-lg">
                   Your payment is successfull and you will be redirected to
-                  orders page in 2 seconds !
+                  orders page in 2 seconds!
                 </h1>
               </div>
             </div>
@@ -207,6 +211,7 @@ export default function Checkout() {
       </section>
     );
   }
+
 
   // 9:14:02
   if (isOrderProcessing) {
@@ -347,6 +352,7 @@ export default function Checkout() {
         </div>
       </div>
 
+      {/** 9:25:27 */}
       <Notification />
     </div>
   );

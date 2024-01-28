@@ -25,6 +25,7 @@ export default function Cart() {
 
     const res = await getAllCartItems(user?._id);
 
+    // 11:28:41
     if (res.success) {
       const updatedData =
         res.data && res.data.length
@@ -45,6 +46,7 @@ export default function Cart() {
           }))
           : [];
 
+      // 11:30:22
       setCartItems(updatedData);
       // 6:53:16
       setPageLevelLoader(false);

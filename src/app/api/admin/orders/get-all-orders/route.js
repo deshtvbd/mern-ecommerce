@@ -5,8 +5,10 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+// 10:37:20
 export async function GET(req) {
   try {
+
     await connectToDB();
     const isAuthUser = await AuthUser(req);
 
@@ -24,7 +26,7 @@ export async function GET(req) {
         return NextResponse.json({
           success: false,
           message:
-            "failed to fetch the orders ! Please try again after some time.",
+            "failed to fetch the orders! Please try again after some time.",
         });
       }
     } else {

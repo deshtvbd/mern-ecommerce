@@ -57,6 +57,7 @@ export const getOrderDetails = async (id) => {
 };
 
 // 9:11:30
+// 10:44:33
 export const getAllOrdersForAllUsers = async () => {
   try {
     const res = await fetch(`/api/admin/orders/get-all-orders`, {
@@ -74,6 +75,7 @@ export const getAllOrdersForAllUsers = async () => {
   }
 };
 
+// 10:44:58
 export const updateStatusOfOrder = async (formData) => {
   try {
     const res = await fetch(`/api/admin/orders/update-order`, {

@@ -8,7 +8,10 @@ import { useContext, useEffect } from "react";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
+// 9:29:08
+// 9:43:57
 export default function Orders() {
+
   const {
     user,
     pageLevelLoader,
@@ -19,14 +22,18 @@ export default function Orders() {
 
   const router = useRouter();
 
+  // 9:44:05
   async function extractAllOrders() {
     setPageLevelLoader(true);
+
     const res = await getAllOrdersForUser(user?._id);
 
     if (res.success) {
       setPageLevelLoader(false);
 
+      // from global context
       setAllOrdersForUser(res.data);
+
       toast.success(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -44,9 +51,11 @@ export default function Orders() {
 
   console.log(allOrdersForUser);
 
+  // 9:49:36
   if (pageLevelLoader) {
     return (
       <div className="w-full min-h-screen flex justify-center items-center">
+
         <PulseLoader
           color={"#000000"}
           loading={pageLevelLoader}
@@ -66,54 +75,57 @@ export default function Orders() {
               <div className="flow-root">
                 {allOrdersForUser && allOrdersForUser.length ? (
                   <ul className="flex flex-col gap-4">
-                    {allOrdersForUser.map((item) => (
-                      <li
-                        key={item._id}
-                        className="bg-gray-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
-                      >
-                        <div className="flex">
-                          <h1 className="font-bold text-lg mb-3 flex-1">
-                            #order: {item._id}
-                          </h1>
-                          <div className="flex items-center">
-                            <p className="mr-3 text-sm font-medium text-gray-900">
-                              Total paid amount
-                            </p>
-                            <p className="mr-3 text-2xl  font-semibold text-gray-900">
-                              ${item.totalPrice}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          {item.orderItems.map((orderItem, index) => (
-                            <div key={index} className="shrink-0">
-                              <img
-                                alt="Order Item"
-                                className="h-24 w-24 max-w-full rounded-lg object-cover"
-                                src={
-                                  orderItem &&
-                                  orderItem.product &&
-                                  orderItem.product.imageUrl
-                                }
-                              />
+
+                    {
+                      allOrdersForUser.map((item) => (
+                        <li
+                          key={item._id}
+                          className="bg-gray-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
+                        >
+                          <div className="flex">
+                            <h1 className="font-bold text-lg mb-3 flex-1">
+                              #order: {item._id}
+                            </h1>
+                            <div className="flex items-center">
+                              <p className="mr-3 text-sm font-medium text-gray-900">
+                                Total paid amount
+                              </p>
+                              <p className="mr-3 text-2xl  font-semibold text-gray-900">
+                                ${item.totalPrice}
+                              </p>
                             </div>
-                          ))}
-                        </div>
-                        <div className="flex gap-5">
-                          <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
-                            {item.isProcessing
-                              ? "Order is Processing"
-                              : "Order is delivered"}
-                          </button>
-                          <button
-                            onClick={() => router.push(`/orders/${item._id}`)}
-                            className=" mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
-                          >
-                            View Order Details
-                          </button>
-                        </div>
-                      </li>
-                    ))}
+                          </div>
+                          <div className="flex gap-2">
+                            {item.orderItems.map((orderItem, index) => (
+                              <div key={index} className="shrink-0">
+                                <img
+                                  alt="Order Item"
+                                  className="h-24 w-24 max-w-full rounded-lg object-cover"
+                                  src={
+                                    orderItem &&
+                                    orderItem.product &&
+                                    orderItem.product.imageUrl
+                                  }
+                                />
+                              </div>
+                            ))}
+                          </div>
+                          <div className="flex gap-5">
+                            <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                              {item.isProcessing
+                                ? "Order is Processing"
+                                : "Order is delivered"}
+                            </button>
+                            <button
+                              onClick={() => router.push(`/orders/${item._id}`)}
+                              className=" mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                            >
+                              View Order Details
+                            </button>
+                          </div>
+                        </li>
+                      ))
+                    }
                   </ul>
                 ) : null}
               </div>
@@ -121,6 +133,7 @@ export default function Orders() {
           </div>
         </div>
       </div>
+
       <Notification />
     </section>
   );

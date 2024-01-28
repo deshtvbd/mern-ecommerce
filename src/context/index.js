@@ -16,8 +16,18 @@ export const initialCheckoutFormData = {
   isProcessing: true,
 };
 
-const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view"];
+// 9:34:17
+// 10:34:32
+// To protect route which Admins and Authenticated users can access.
+const protectedRoutes = [
+  "cart",
+  "checkout",
+  "account",
+  "orders",
+  "admin-view"
+];
 
+// 9:35:19
 const protectedAdminRoutes = [
   "/admin-view",
   "/admin-view/add-product",
@@ -56,12 +66,16 @@ export default function GlobalState({ children }) {
     initialCheckoutFormData
   );
 
+  // 9:46:10
   const [allOrdersForUser, setAllOrdersForUser] = useState([]);
+  // 10:03:34
   const [orderDetails, setOrderDetails] = useState(null);
+  // 10:46:31
   const [allOrdersForAllUsers, setAllOrdersForAllUsers] = useState([]);
 
   const router = useRouter();
   const pathName = usePathname();
+
 
   // 2:24:00
   /* When a user login and redirected to Home page, isAuthUser becomes null. The login data needs to be persisted in the GlobalContext. Althourhg the user is authenticated, when the app is redirected to Home page, the state variable vanishes. In the context, whenever user will load Home page, we have to check, if the token is already registered in the cookies. If the token is already available, the user is authenticated.
@@ -77,12 +91,15 @@ export default function GlobalState({ children }) {
       setUser(userData);
       // 8:11:07
       setCartItems(getCartItems);
+
     } else {
       setIsAuthUser(false);
       setUser({}); //unauthenticated user
     }
   }, [Cookies]);
 
+
+  // 9:35:26
   useEffect(() => {
     if (
       pathName !== "/register" &&
@@ -95,6 +112,8 @@ export default function GlobalState({ children }) {
       router.push("/login");
   }, [user, pathName]);
 
+
+  // 9:39:21
   useEffect(() => {
     if (
       user !== null &&
@@ -105,6 +124,7 @@ export default function GlobalState({ children }) {
     )
       router.push("/unauthorized-page");
   }, [user, pathName]);
+
 
   return (
     <GlobalContext.Provider

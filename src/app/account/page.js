@@ -34,7 +34,8 @@ export default function Account() {
   const [showAddressForm, setShowAddressForm] = useState(false);
   // 7:59:06
   const [currentEditedAddressId, setCurrentEditedAddressId] = useState(null);
-  const router = useRouter()
+  // 10:00:42
+  const router = useRouter();
 
   // 7:55:08
   async function extractAllAddresses() {
@@ -177,17 +178,20 @@ export default function Account() {
                   {addresses && addresses.length ? (
                     addresses.map((item) => (
                       <div className="border p-6" key={item._id}>
+
                         <p>Name : {item.fullName}</p>
                         <p>Address : {item.address}</p>
                         <p>City : {item.city}</p>
                         <p>Country : {item.country}</p>
                         <p>PostalCode : {item.postalCode}</p>
+
                         <button
                           onClick={() => handleUpdateAddress(item)}
                           className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
                         >
                           Update
                         </button>
+
                         <button
                           onClick={() => handleDelete(item._id)}
                           className="mt-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
@@ -207,6 +211,7 @@ export default function Account() {
                             "Delete"
                           )}
                         </button>
+
                       </div>
                     ))
                   ) : (

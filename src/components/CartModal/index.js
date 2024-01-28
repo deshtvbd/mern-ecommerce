@@ -48,6 +48,7 @@ export default function CartModal() {
           }))
           : [];
 
+      // 11:30:52
       setCartItems(updatedData);
       // 6:18:48
       localStorage.setItem("cartItems", JSON.stringify(updatedData));

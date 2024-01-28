@@ -78,7 +78,7 @@ const initialFormData = {
   priceDrop: 0,
 };
 
-
+// 2:42:10
 export default function AdminAddNewProduct() {
   const [formData, setFormData] = useState(initialFormData);
 

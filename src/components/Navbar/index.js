@@ -65,7 +65,7 @@ export default function Navbar() {
   const pathName = usePathname();
   const router = useRouter();
 
-  console.log(pathName);
+  // console.log(pathName);
 
   // 4:27:42
   /* যখন কোন ইউজার Update করার জন্য আপডেট বাটনে ক্লিক করে তখন add-product কম্পোনেন্টে ডাটা পপুলেট করে। কিন্তু, এই ফর্মে থাকা অবস্থায় Back বাটনে ক্লিক করে All Products ফর্মে যায় এবং নতুন প্রডাক্ট যুক্ত করার জন্য Add New Product বাটনে ক্লিক করে, তবে, আগের আপডেট করার জন্য পপুলেট করা ফর্মের ডাটা দেখতে পাবে।
@@ -100,7 +100,7 @@ export default function Navbar() {
             className="flex items-center cursor-pointer"
           >
             <span className="slef-center text-2xl font-semibold whitespace-nowrap">
-              Ecommercery
+              NextTut
             </span>
           </div>
 

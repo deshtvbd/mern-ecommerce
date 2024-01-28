@@ -5,9 +5,11 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+// 10:40:31
 export async function PUT(req) {
   try {
     await connectToDB();
+
     const isAuthUser = await AuthUser(req);
     const data = await req.json();
 

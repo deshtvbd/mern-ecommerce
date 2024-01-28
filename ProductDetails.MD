@@ -41,9 +41,18 @@ Firebase Project Name: NextJS-Ecommerce-2023
 * After I get Firebase dashboard, I shall create a new Web app.
 * From "Build" menu, configure "Storage" in "test mode".
 
+Stripe
+******************************
+Login Email: manzur.deshtv@gmail.com
+
+URL to get developer API keys
+---
+https://dashboard.stripe.com/test/apikeys
+
 Dummy Visa Credit Card Details
 https://www.paypalobjects.com/en_GB/vhelp/paypalmanager_help/credit_card_numbers.htm
 ******************************
-4111111111111111
-02/28
-
+Name:   Tom Bhai
+CC No.: 4111111111111111
+Month:  02/28
+CVC:    356

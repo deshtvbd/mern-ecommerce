@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import { PulseLoader } from "react-spinners";
 
 // 2:41:43
+// 10:46:13
 export default function AdminView() {
   const {
     allOrdersForAllUsers,
@@ -18,14 +19,17 @@ export default function AdminView() {
     setComponentLevelLoader,
   } = useContext(GlobalContext);
 
+  // 10:47:07
   async function extractAllOrdersForAllUsers() {
     setPageLevelLoader(true);
+
     const res = await getAllOrdersForAllUsers();
 
-    console.log(res);
+    // console.log("app/admin-view/page.js", res);
 
     if (res.success) {
       setPageLevelLoader(false);
+
       setAllOrdersForAllUsers(
         res.data && res.data.length
           ? res.data.filter((item) => item.user._id !== user._id)
@@ -36,14 +40,21 @@ export default function AdminView() {
     }
   }
 
-  useEffect(() => {
-    if (user !== null) extractAllOrdersForAllUsers();
-  }, [user]);
+  // console.log("app/admin-view/page.js", allOrdersForAllUsers, allOrdersForAllUsers.length);
 
+  // 10:47:33
+  // ইউজার চেঞ্জ হলে ডাটাবেজ থেকে নতুন করে অর্ডারগুলো পড়ে নিয়ে আসো
+  useEffect(() => {
+    if (user !== null) {
+      extractAllOrdersForAllUsers();
+    }
+  }, [user]);
   // console.log(allOrdersForAllUsers);
 
+  // 10:58:28
   async function handleUpdateOrderStatus(getItem) {
     setComponentLevelLoader({ loading: true, id: getItem._id });
+
     const res = await updateStatusOfOrder({
       ...getItem,
       isProcessing: false,
@@ -57,6 +68,7 @@ export default function AdminView() {
     }
   }
 
+  // 10:55:02
   if (pageLevelLoader) {
     return (
       <div className="w-full min-h-screen flex justify-center items-center">
@@ -76,90 +88,93 @@ export default function AdminView() {
         <div>
           <div className="px-4 py-6 sm:px-8 sm:py-10">
             <div className="flow-root">
-              {allOrdersForAllUsers && allOrdersForAllUsers.length ? (
-                <ul className="flex flex-col gap-4">
-                  {allOrdersForAllUsers.map((item) => (
-                    <li
-                      key={item._id}
-                      className="bg-gray-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
-                    >
-                      <div className="flex">
-                        <h1 className="font-bold text-lg mb-3 flex-1">
-                          #order: {item._id}
-                        </h1>
-                        <div className="flex flex-col gap-2">
-                          <div className="flex items-center">
-                            <p className="mr-3 text-sm font-medium text-gray-900">
-                              User Name :
-                            </p>
-                            <p className="text-sm  font-semibold text-gray-900">
-                              {item?.user?.name}
-                            </p>
-                          </div>
-                          <div className="flex items-center">
-                            <p className="mr-3 text-sm font-medium text-gray-900">
-                              User Email :
-                            </p>
-                            <p className="text-sm  font-semibold text-gray-900">
-                              {item?.user?.email}
-                            </p>
-                          </div>
-                          <div className="flex items-center">
-                            <p className="mr-3 text-sm font-medium text-gray-900">
-                              Total Paid Amount :
-                            </p>
-                            <p className="text-sm  font-semibold text-gray-900">
-                              ${item?.totalPrice}
-                            </p>
+
+              {
+                allOrdersForAllUsers && allOrdersForAllUsers.length ? (
+                  <ul className="flex flex-col gap-4">
+                    {allOrdersForAllUsers.map((item) => (
+                      <li
+                        key={item._id}
+                        className="bg-gray-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
+                      >
+                        <div className="flex">
+                          <h1 className="font-bold text-lg mb-3 flex-1">
+                            #order: {item._id}
+                          </h1>
+                          <div className="flex flex-col gap-2">
+                            <div className="flex items-center">
+                              <p className="mr-3 text-sm font-medium text-gray-900">
+                                User Name :
+                              </p>
+                              <p className="text-sm  font-semibold text-gray-900">
+                                {item?.user?.name}
+                              </p>
+                            </div>
+                            <div className="flex items-center">
+                              <p className="mr-3 text-sm font-medium text-gray-900">
+                                User Email :
+                              </p>
+                              <p className="text-sm  font-semibold text-gray-900">
+                                {item?.user?.email}
+                              </p>
+                            </div>
+                            <div className="flex items-center">
+                              <p className="mr-3 text-sm font-medium text-gray-900">
+                                Total Paid Amount :
+                              </p>
+                              <p className="text-sm  font-semibold text-gray-900">
+                                ${item?.totalPrice}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex gap-2">
-                        {item.orderItems.map((orderItem, index) => (
-                          <div key={index} className="shrink-0">
-                            <img
-                              alt="Order Item"
-                              className="h-24 w-24 max-w-full rounded-lg object-cover"
-                              src={
-                                orderItem &&
-                                orderItem.product &&
-                                orderItem.product.imageUrl
-                              }
-                            />
-                          </div>
-                        ))}
-                      </div>
-                      <div className="flex gap-5">
-                        <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
-                          {item.isProcessing
-                            ? "Order is Processing"
-                            : "Order is delivered"}
-                        </button>
-                        <button
-                          onClick={() => handleUpdateOrderStatus(item)}
-                          disabled={!item.isProcessing}
-                          className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
-                        >
-                          {componentLevelLoader &&
-                            componentLevelLoader.loading &&
-                            componentLevelLoader.id === item._id ? (
-                            <ComponentLevelLoader
-                              text={"Updating Order Status"}
-                              color={"#ffffff"}
-                              loading={
-                                componentLevelLoader &&
-                                componentLevelLoader.loading
-                              }
-                            />
-                          ) : (
-                            "Update Order Status"
-                          )}
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
+                        <div className="flex gap-2">
+                          {item.orderItems.map((orderItem, index) => (
+                            <div key={index} className="shrink-0">
+                              <img
+                                alt="Order Item"
+                                className="h-24 w-24 max-w-full rounded-lg object-cover"
+                                src={
+                                  orderItem &&
+                                  orderItem.product &&
+                                  orderItem.product.imageUrl
+                                }
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex gap-5">
+                          <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                            {item.isProcessing
+                              ? "Order is Processing"
+                              : "Order is delivered"}
+                          </button>
+                          <button
+                            onClick={() => handleUpdateOrderStatus(item)}
+                            disabled={!item.isProcessing}
+                            className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                          >
+                            {componentLevelLoader &&
+                              componentLevelLoader.loading &&
+                              componentLevelLoader.id === item._id ? (
+                              <ComponentLevelLoader
+                                text={"Updating Order Status"}
+                                color={"#ffffff"}
+                                loading={
+                                  componentLevelLoader &&
+                                  componentLevelLoader.loading
+                                }
+                              />
+                            ) : (
+                              "Update Order Status"
+                            )}
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null
+              }
             </div>
           </div>
         </div>
